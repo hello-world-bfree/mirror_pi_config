@@ -7,8 +7,8 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 if [ -z "$DEV_ENV" ]; then
-    echo "env var DEV_ENV needs to be present"
-    exit 1
+    echo "DEV_ENV not set but is required. Setting to default: $HOME/mirror_pi_config."
+    DEV_ENV="$HOME/mirror_pi_config"
 fi
 
 # if i just did DEV_ENV=$(pwd) ./run then this is needed for the rest of the
