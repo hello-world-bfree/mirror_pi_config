@@ -6,8 +6,8 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 if [ -z "$DEV_ENV" ]; then
-    echo "DEV_ENV not set but is required. Exiting..."
-    exit 1
+    echo "DEV_ENV not set but is required. Setting to default: $HOME/mirror_pi_config."
+    DEV_ENV="$HOME/mirror_pi_config"
 fi 
 
 if [[ $1 == "--dry" ]]; then
@@ -28,7 +28,7 @@ sync_directories() {
     log "copying over files from: $1"
     pushd $1 &> /dev/null
     (
-        configs=`find . -mindepth 1 -maxdepth -type d`
+        configs=`find . -mindepth 1 -maxdepth 1 -type d`
         for c in $configs; do
             directory=${2%/}/${c#./}
             log "   removing: rm -rf $directory"
